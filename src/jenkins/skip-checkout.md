@@ -1,0 +1,6 @@
+### skipDefaultCheckout
+```Goovy
+option{
+    skipDefaultCheckout()
+}
+```
