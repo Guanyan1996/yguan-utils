@@ -1,4 +1,3 @@
-import ssl
 from typing import List
 
 from kafka import KafkaConsumer, KafkaProducer
