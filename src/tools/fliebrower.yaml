@@ -1,0 +1,24 @@
+# 对外显示服务器的特定目录，可以创建下载
+# db和json放到/path/filebrowser/config/下。
+# 默认账号密码 admin
+version: '2'
+services:
+  folebrowser:
+    container_name: filebrowser
+    image: filebrowser/filebrowser
+    # docker中无特定进程运行时，会自动退出，tty是保持一个进程
+    tty: true
+    volumes:
+      - ${SourceURL}/:/srv
+      - /path/filebrowser/config/database.db:/database.db
+      - /path/filebrowser/config/.filebrowser.json:/.filebrowser.json
+    ports:
+      - 8080:80
+    # network_mode: "filebrowser"
+    networks:
+      - filebrowser
+    # network_mode与networks不能并存
+    restart: always
+networks:
+  filebrowser:
+    driver: bridge
