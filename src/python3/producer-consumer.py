@@ -33,6 +33,7 @@ import random
 import threading
 import time
 
+
 def producer(queue, event):
     """Pretend we're getting a number from the network."""
     while not event.is_set():
@@ -41,6 +42,7 @@ def producer(queue, event):
         queue.put(message)
 
     logging.info("Producer received event. Exiting")
+
 
 def consumer(queue, event):
     """Pretend we're saving a number in the database."""
@@ -51,6 +53,7 @@ def consumer(queue, event):
         )
 
     logging.info("Consumer received event. Exiting")
+
 
 if __name__ == "__main__":
     format = "%(asctime)s: %(message)s"
@@ -65,6 +68,8 @@ if __name__ == "__main__":
         time.sleep(0.1)
         logging.info("Main: about to set event")
         event.set()
+
+
 class Pipeline(queue.Queue):
     def __init__(self):
         super().__init__(maxsize=10)
@@ -79,4 +84,6 @@ class Pipeline(queue.Queue):
         logging.debug("%s:about to add %d to queue", name, value)
         self.put(value)
         logging.debug("%s:added %d to queue", name, value)
+
+
 t = threading.Timer(30.0, my_function)

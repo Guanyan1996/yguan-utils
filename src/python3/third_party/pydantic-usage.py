@@ -69,5 +69,5 @@ class Password(BaseModel):
 
 
 test = Student(age=1, sex=123, test=123, key="helloworld1232aASA")
-test.age=23
+test.age = 23
 print(test)

@@ -1,3 +1,31 @@
+"""
+!/usr/bin/python3.7
+-*- coding: UTF-8 -*-
+Author: https://github.com/Guanyan1996
+         ┌─┐       ┌─┐
+      ┌──┘ ┴───────┘ ┴──┐
+      │                 │
+      │       ───       │
+      │  ─┬┘       └┬─  │
+      │                 │
+      │       ─┴─       │
+      │                 │
+      └───┐         ┌───┘
+          │         │
+          │         │
+          │         │
+          │         └──────────────┐
+          │                        │
+          │                        ├─┐
+          │                        ┌─┘
+          │                        │
+          └─┐  ┐  ┌───────┬──┐  ┌──┘
+            │ ─┤ ─┤       │ ─┤ ─┤
+            └──┴──┘       └──┴──┘
+                神兽保佑
+                代码无BUG!
+
+"""
 from typing import List
 
 from kafka import KafkaConsumer, KafkaProducer

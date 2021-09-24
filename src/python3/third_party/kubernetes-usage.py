@@ -26,11 +26,10 @@ Author: https://github.com/Guanyan1996
                 代码无BUG!
 
 """
-from kubernetes import config
-from kubernetes.watch import Watch
 from kubernetes.client import BatchV1Api, CoreV1Api, V1DeleteOptions, V1Job
-from retrying import retry
+from kubernetes.watch import Watch
 from loguru import logger
+from retrying import retry
 from urllib3.exceptions import ProtocolError
 
 
@@ -69,7 +68,7 @@ class KubernetesTask(object):
         pod_list = self.corev1api.list_namespaced_pod(namespace=self.ns, label_selector=f"job-name={self.name}")
         for pod in pod_list.items:
             pod_logger = self.corev1api.read_namespaced_pod_log(namespace=self.ns, name=pod.metadata.name,
-                                                             tail_lines=self.tail_lines)
+                                                                tail_lines=self.tail_lines)
             logger.info(
                 f"JOB({self.name})'s POD({pod.metadata.name}) loggers \n {pod_logger}")
 
