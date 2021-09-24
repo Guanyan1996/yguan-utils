@@ -1,5 +1,4 @@
-"""
-!/usr/bin/python3.7
+```text
 -*- coding: UTF-8 -*-
 Author: https://github.com/Guanyan1996
          ┌─┐       ┌─┐
@@ -24,26 +23,19 @@ Author: https://github.com/Guanyan1996
             └──┴──┘       └──┴──┘
                 神兽保佑
                 代码无BUG!
+```
 
-"""
-import requests
-from loguru import logger
+```shell
+# nfs-server:
+# install nfs on dev machine:
+# https://vitux.com/install-nfs-server-and-client-on-ubuntu/
+sudo apt install nfs-kernel-server
+sudo chown nobody:nogroup /home/rjhuang/body_on_ipc
+sudo exportfs -a
+sudo systemctl restart nfs-kernel-server
+echo '${mount_local_path} *(rw,sync,no_subtree_check,no_root_squash)' /etc/exports
 
-
-class NexusApi(object):
-    def __init__(self, user: str, passwd: str):
-        self._auth = (user, passwd)
-
-    def upload_file(self, url: str, file: str):
-        """
-        Args:
-            url: upload的web端url全路径包含file名
-            file: 本地要上传的文件路径
-        Returns:
-        """
-        logger.info(f"ready upload to {url}")
-        response = requests.put(url=url, data=open(file, "rb").read(), auth=self._auth)
-        if response.status_code == 201:
-            logger.info(f"upload {url} successfully")
-        else:
-            logger.info(response.raise_for_status())
+# nfs-client:
+mkdir -p ${local_mount_path}
+mount -t nfs -o nolock -o tcp -o rsize=32768,wsize=32768 ${nfs-server-ip} ${local_mount_path}
+```
