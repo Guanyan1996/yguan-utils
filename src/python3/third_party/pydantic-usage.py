@@ -1,7 +1,8 @@
+import re
 from typing import Optional, Union
 
 from pydantic import BaseModel, Field, validator
-import re
+
 
 class Student(BaseModel):
     age: int
