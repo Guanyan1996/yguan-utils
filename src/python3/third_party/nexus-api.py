@@ -36,6 +36,7 @@ class NexusApi(object):
 
     def upload_file(self, url: str, file: str):
         """
+        curl -v  -u ${username}:${passwd} --upload-file ${file} ${url}
         Args:
             url: upload的web端url全路径包含file名
             file: 本地要上传的文件路径
