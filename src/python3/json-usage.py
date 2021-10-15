@@ -37,3 +37,6 @@ def compress_json_brotli(jsonfilename):
     with open("test.BR", 'wb') as f:
         content = brotli.compress(data, quality=11)
         f.write(content)
+    with open("test.BR", 'rb') as f:
+        data = brotli.decompress(f.read())
+        print(len(json.loads(data)))
