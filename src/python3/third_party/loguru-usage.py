@@ -36,5 +36,6 @@ def my_function(x, y, z):
     return 1 / (x + y + z)
 
 
+logger.add('runtime.log', level="INFO", rotation="100KB", retention=0, backtrace=True)
 logger.info("hello,wolrd")
 my_function(0, 0, 0)
