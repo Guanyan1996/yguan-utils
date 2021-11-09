@@ -26,11 +26,16 @@ Author: https://github.com/Guanyan1996
                 代码无BUG!
 
 """
+import kubernetes
 from kubernetes.client import BatchV1Api, CoreV1Api, V1DeleteOptions, V1Job
 from kubernetes.watch import Watch
 from loguru import logger
 from retrying import retry
 from urllib3.exceptions import ProtocolError
+
+
+def covert_object_yaml(k8s_object, output):
+    kubernetes.client.ApiClient().sanitize_for_serialization(k8s_object), open(output, 'w')
 
 
 class KubernetesTask(object):
