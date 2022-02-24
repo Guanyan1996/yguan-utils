@@ -28,7 +28,7 @@ Author: https://github.com/Guanyan1996
 """
 from typing import List
 
-from kafka import KafkaConsumer, KafkaProducer
+from kafka import KafkaConsumer, KafkaProducer, TopicPartition
 from loguru import logger
 
 
@@ -60,3 +60,24 @@ class JinShanYunKafka(object):
         print('consumer start to consuming...')
         for message in consumer:
             logger.info(f"{message.topic}, {message.offset}, {message.key}, {message.partition}")
+
+    def customer_from_timestamp(self, topics):
+        consumer = KafkaConsumer(*topics,
+                                 bootstrap_servers=self.bootstrap_servers,
+                                 sasl_mechanism="PLAIN",
+                                 security_protocol="SASL_PLAINTEXT",
+                                 api_version=(0, 10),
+                                 sasl_plain_username="",
+                                 sasl_plain_password=""
+                                 )
+        consumer.poll()
+        tp = TopicPartition(topics, 0)
+        rec_in = consumer.offsets_for_times({tp: 1636628400000})
+        rec_out = consumer.offsets_for_times({tp: 1636635600000})
+        consumer.seek(tp, rec_in[tp].offset)
+        consumer.seek(tp, rec_in[tp].offset)  # lets go to the first message in New Year!
+
+        for message in consumer:
+            if message.offset >= rec_out[tp].offset:
+                break
+            msg_key = message.key.decode('utf-8')
