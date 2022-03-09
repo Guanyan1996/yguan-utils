@@ -2,9 +2,7 @@ import logging
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
-formatter = logging.Formatter(
-    '%(asctime)s - %(name)s - %(levelname)s: - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S')
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s: - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
 fh = logging.FileHandler('log.txt')
 fh.setLevel(logging.DEBUG)
